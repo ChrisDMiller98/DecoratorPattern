@@ -11,9 +11,12 @@ namespace DecoratorPattern
     {
         static void Main(string[] args)
         {
-            TextField tf = new TextField();
-            BorderDecorator bd = new BorderDecorator();
-            ScrollDecorator sd = new ScrollDecorator();
+            int width = 0;
+            int height = 0;
+            Widget w;
+            TextField tf = new TextField(width, height);
+            BorderDecorator bd = new BorderDecorator(w);//?
+            ScrollDecorator sd = new ScrollDecorator(w);
 
             bd.SetComponent(tf);
             sd.SetComponent(tf);
@@ -35,6 +38,11 @@ namespace DecoratorPattern
         private int width;
         private int height;
 
+        public TextField(int w, int h)
+        {
+            this.width = w;
+            this.height = h;
+        }
         public override void draw()
         {
             Console.WriteLine("I am a Text Field ");
@@ -49,12 +57,14 @@ namespace DecoratorPattern
         private Widget wid;
         public Decorator(Widget w)
         {
-
+            this.wid = w;
         }
+        
         public void SetComponent(Widget w)
         {
             this.wid = w;
         }
+        
 
         public override void draw()
         {
@@ -70,7 +80,6 @@ namespace DecoratorPattern
     {
         public BorderDecorator(Widget w)
         {
-
 
         }
         public override void draw()
