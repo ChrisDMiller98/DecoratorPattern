@@ -19,7 +19,7 @@ namespace DecoratorPattern
             ScrollDecorator sd = new ScrollDecorator(w);
 
             bd.SetComponent(tf);
-            sd.SetComponent(tf);
+            sd.SetComponent(bd);
 
             bd.draw();
             sd.draw();
@@ -52,7 +52,6 @@ namespace DecoratorPattern
     abstract class Decorator : Widget
 
     {
-        //protected Widget w;
 
         private Widget wid;
         public Decorator(Widget w)
@@ -72,6 +71,7 @@ namespace DecoratorPattern
             {
                 wid.draw();
             }
+            Console.WriteLine("I am a decorator, holding a:");
         }
     }
 
@@ -79,8 +79,9 @@ namespace DecoratorPattern
 
     {
         public BorderDecorator(Widget w)
+            : base(w)//This seemed to stop error red lines
         {
-
+            Decorator(w);//cant figure this out
         }
         public override void draw()
         {
@@ -93,6 +94,7 @@ namespace DecoratorPattern
 
     {
         public ScrollDecorator(Widget w)
+            : base(w)
         {
 
         }
